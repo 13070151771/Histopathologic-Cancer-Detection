@@ -129,7 +129,7 @@ Dataset
 print('Loading dataset...')
 
 try:
-	print(df)
+	df = df
 except:
 	df = pd.DataFrame({'path': glob(os.path.join('../input/histopathologic-cancer-detection/train/', '*.tif'))})
 	df['id'] = df.path.map(lambda x: x.split('\\')[1].split(".")[0])

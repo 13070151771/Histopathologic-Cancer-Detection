@@ -71,12 +71,12 @@ def conv2d_bn(x,
     # Returns
         Output tensor after applying `Conv2D` and `BatchNormalization`.
     """
-    x = Conv2D(32,
-               3,
-               strides=2,
-               padding='same',
-               use_bias=False,
-               name=None)(img_input)
+    x = Conv2D(filters,
+               kernel_size,
+               strides=strides,
+               padding=padding,
+               use_bias=use_bias,
+               name=name)(x)
     if not use_bias:
         bn_axis = 1 if K.image_data_format() == 'channels_first' else 3
         bn_name = None if name is None else name + '_bn'
@@ -238,7 +238,7 @@ def SEInceptionResNetV2(include_top=True,
         weights=weights)
 
     if input_tensor is None:
-        img_input = Input(shape=(139, 139,3))
+        img_input = Input(shape=input_shape)
     else:
         if not K.is_keras_tensor(input_tensor):
             img_input = Input(tensor=input_tensor, shape=input_shape)
